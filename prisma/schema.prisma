@@ -18,16 +18,42 @@ datasource db {
 //     updatedAt DateTime @updatedAt
 // }
 
-model User {
-    id  String @id @default(cuid())
-    username String 
-    bio String
-    profilePic String
-    posts //Post[]
-    likes //Like[]
-    comments //Comment[]
+model Post {
+    id           String   @id @default(cuid())
+    contents     String
+    creationDate DateTime @default(now())
+    author       User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    authorId     String
+    likes        Like[]
+    comments     Comment[]
 
+    @@index([authorId])
 }
+
+model Like {
+    id         String     @id @default(cuid())
+    author     User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    authorId   String
+    post       Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId     String
+
+    @@index([authorId])
+    @@index([postId])
+}
+
+model Comment {
+    id         String     @id @default(cuid())
+    contents   String
+    creationDate DateTime @default(now())
+    author     User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    authorId   String
+    post       Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId     String
+
+    @@index([authorId])
+    @@index([postId])
+}
+
 
 // Necessary for Next auth
 model Account {
@@ -66,6 +92,13 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+
+    //non next auth
+    posts Post[]
+    likes Like[]
+    comments Comment[]
+    followers User[]  @relation(name: "Followers")
+    follows   User[]  @relation(name: "Followers")
 }
 
 model VerificationToken {
