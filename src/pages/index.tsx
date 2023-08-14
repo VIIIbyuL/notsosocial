@@ -10,16 +10,21 @@ export default function HomePage() {
 
   if (!session) {
     return (
-      <>
-        <div>Please sign in before proceeding :)</div>
-        <button
-          onClick={() => {
-            signIn("discord").catch(console.log);
-          }}
-        >
-          Sign in here with discord.
-        </button>
-      </>
+      <div className="flex h-screen w-screen items-center justify-center ">
+        <ul className="bg-slate-400 p-20 rounded-md">
+          <li className="mb-10 ">Please sign in before proceeding :)</li>
+          <li className="flex text-center w-auto justify-center">
+            <button
+              className="button"
+              onClick={() => {
+                signIn("discord").catch(console.log);
+              }}
+            >
+              Sign in here with discord.
+            </button>
+          </li>
+        </ul>
+      </div>
     );
   }
 
@@ -28,6 +33,7 @@ export default function HomePage() {
       <>
         <div>Welcome {session.user.name} !</div>
         <button
+          className="button"
           onClick={() => {
             signOut().catch(console.log);
           }}
