@@ -12,10 +12,21 @@ datasource db {
 }
 
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// model Example {
+//     id        String   @id @default(cuid())
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+// }
+
+model User {
+    id  String @id @default(cuid())
+    username String 
+    bio String
+    profilePic String
+    posts //Post[]
+    likes //Like[]
+    comments //Comment[]
+
 }
 
 // Necessary for Next auth
