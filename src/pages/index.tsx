@@ -1,8 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function HomePage() {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
+  
 
   if (status === "loading") {
     return <div>CURRENTLY LOADING...</div>;
@@ -39,6 +43,13 @@ export default function HomePage() {
           }}
         >
           Sign out here
+        </button>
+        
+        <button
+        onClick={() => {
+          router.push('/Profile').catch(console.log)
+        }}>
+          View Your Profile
         </button>
       </>
     );
