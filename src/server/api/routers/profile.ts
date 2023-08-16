@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { z } from "zod";
 import { inferAsyncReturnType } from "@trpc/server";
 import {
@@ -40,5 +39,18 @@ export const ProfileRouter = createTRPCRouter({
         },
       });
       return profile;
+    }),
+  findProfile: publicProcedure
+    .input(
+      z.object({
+        name: z.string(),
+      })
+    )
+    .mutation(async ({ input: { name }, ctx }) => {
+      const profile = await ctx.prisma.user.findMany({
+        where: {
+          name: name,
+        },
+      });
     }),
 });

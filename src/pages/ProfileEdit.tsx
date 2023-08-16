@@ -39,11 +39,10 @@ export default function EditProfile() {
     setImage(selectedImageUrl);
   };
 
-
   const handleSubmit = (event: FormEvent) => {
     console.log("handleSubmit called");
     event.preventDefault();
-  
+
     if (!session) {
       return; // Handle not logged in case
     }
@@ -52,7 +51,8 @@ export default function EditProfile() {
 
     const profileUpdates = {
       name: trimmedName !== session.user.name ? trimmedName : session.user.name,
-      email: trimmedEmail !== session.user.email ? trimmedEmail : session.user.email,
+      email:
+        trimmedEmail !== session.user.email ? trimmedEmail : session.user.email,
       image: image ?? null,
     };
 
@@ -65,22 +65,21 @@ export default function EditProfile() {
       return;
     }
     console.log("Before editProfileMutation.mutateAsync");
-  
+
     editProfileMutation.mutate({
       name,
       email,
       image,
     });
-  
+
     // No need for try-catch since errors are handled by editProfileMutation
-  
+
     console.log("After editProfileMutation.mutateAsync");
-  
+
     setName("");
     setEmail("");
     setImage("");
   };
-  
 
   return (
     <div>
@@ -111,7 +110,6 @@ export default function EditProfile() {
           id="image"
           name="image"
           onChange={handleImageChange}
-        
         ></input>
 
         <button type="submit" className="button">
