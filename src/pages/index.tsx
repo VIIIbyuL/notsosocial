@@ -6,8 +6,6 @@ export default function HomePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  
-
   if (status === "loading") {
     return <div>CURRENTLY LOADING...</div>;
   }
@@ -15,9 +13,9 @@ export default function HomePage() {
   if (!session) {
     return (
       <div className="flex h-screen w-screen items-center justify-center ">
-        <ul className="bg-slate-400 p-20 rounded-md">
+        <ul className="rounded-md bg-slate-400 p-20">
           <li className="mb-10 ">Please sign in before proceeding :)</li>
-          <li className="flex text-center w-auto justify-center">
+          <li className="flex w-auto justify-center text-center">
             <button
               className="button"
               onClick={() => {
@@ -44,11 +42,13 @@ export default function HomePage() {
         >
           Sign out here
         </button>
-        
+
         <button
-        onClick={() => {
-          router.push('/Profile').catch(console.log)
-        }}>
+          className="button"
+          onClick={() => {
+            router.push("/Profile").catch(console.log);
+          }}
+        >
           View Your Profile
         </button>
       </>
