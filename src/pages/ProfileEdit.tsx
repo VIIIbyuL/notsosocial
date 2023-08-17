@@ -90,7 +90,11 @@ export default function EditProfile() {
           id="name"
           name="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            e.preventDefault();
+            setName(e.target.value);
+          }}
+          required
         ></input>
 
         <label htmlFor="email">Email:</label>
@@ -100,8 +104,10 @@ export default function EditProfile() {
           name="email"
           value={email}
           onChange={(e) => {
+            e.preventDefault();
             setEmail(e.target.value);
           }}
+          required
         ></input>
 
         <label htmlFor="image">Image: </label>
@@ -114,6 +120,16 @@ export default function EditProfile() {
 
         <button type="submit" className="button">
           Save Your Changes
+        </button>
+
+        <button
+          className="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/").catch(console.log);
+          }}
+        >
+          Go Back Home
         </button>
       </form>
     </div>
