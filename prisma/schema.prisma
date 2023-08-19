@@ -27,6 +27,7 @@ model Post {
     likes        Like[]
     comments     Comment[]
 
+
     @@index([authorId])
 }
 

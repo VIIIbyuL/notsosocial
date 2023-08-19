@@ -16,7 +16,7 @@ export default function DisplaySearch({
 }) {
   return (
     <div>
-    display reached
+      display reached
       {postData.map((item, index) => (
         <div key={index}>
           <h3>{item.author}</h3>
@@ -45,6 +45,7 @@ export default function DisplaySearch({
               ))}
             </ul>
           )}
+          {/* <button>LIKING THIS</button> */}
         </div>
       ))}
     </div>
