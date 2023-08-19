@@ -2,11 +2,23 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { api } from "~/utils/api";
+import DisplayPosts from "~/components/DisplayPosts";
+// import { type Like } from "@prisma/client";
+
+// type PostResult = {
+//   contents: string | null;
+//   creationDate: Date | null; // Update the type to Date
+//   author?: string | null;
+//   likes?: Like[] | null;
+//   comments?: Comment[] | null;
+// };
 
 export default function HomePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [showPop, setShowPop] = useState(true);
+  const { data: postData = [] } = api.post.getAll.useQuery();
 
   if (status === "loading") {
     return <div>CURRENTLY LOADING...</div>;
@@ -49,6 +61,9 @@ export default function HomePage() {
             </div>
           </div>
         )}
+
+        {/* Post loader component here? */}
+        <DisplayPosts postData={postData} />
 
         <ul className="fixed bottom-0 flex w-full items-center justify-center gap-5">
           <li>

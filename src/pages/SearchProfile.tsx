@@ -60,6 +60,15 @@ export default function SearchProfile() {
 
         <button type="submit">Search</button>
       </form>
+      <button
+        className="button"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push("/").catch(console.log);
+        }}
+      >
+        Go Back Home
+      </button>
 
       {/* render here */}
       {/* DisplaySearch */}
