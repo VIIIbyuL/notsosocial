@@ -15,8 +15,8 @@ export default function DisplaySearch({
   postData: PostResult[];
 }) {
   return (
-    <div>
-      display reached
+    <div className="flex w-screen flex-col items-center gap-5 text-center">
+      NOT SO SOCIAL
       {postData.map((item, index) => (
         <div key={index}>
           <h3>{item.author}</h3>

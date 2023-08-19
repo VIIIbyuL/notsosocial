@@ -47,6 +47,21 @@ export default function HomePage() {
   if (session) {
     return (
       <>
+        <nav>
+          <ul>
+            <li>
+              <button
+                onClick={() => {
+                  router.push("/CreatePost").catch(console.log);
+                }}
+              >
+                {" "}
+                make a post
+              </button>
+            </li>
+          </ul>
+        </nav>
+
         {showPop && (
           <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-slate-500 p-16">
             <div>Welcome {session.user.name} !</div>

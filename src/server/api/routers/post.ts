@@ -20,9 +20,6 @@ export const PostRouter = createTRPCRouter({
     )
     .mutation(async ({ input: { contents }, ctx }) => {
       const userId = ctx.session?.user.id;
-      //   const user = await ctx.prisma.user.findUnique({
-      //     where: { id: userId },
-      //   });
       const post = await ctx.prisma.post.create({
         data: {
           author: {
@@ -33,5 +30,6 @@ export const PostRouter = createTRPCRouter({
           contents: contents,
         },
       });
+      return post;
     }),
 });
