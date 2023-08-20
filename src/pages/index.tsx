@@ -18,7 +18,11 @@ export default function HomePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [showPop, setShowPop] = useState(true);
-  const { data: postData = [] } = api.post.getAll.useQuery();
+  const { data: postData = [], error } = api.post.getAll.useQuery();
+
+  if (error) {
+    return <div>SOMETHING WHEN WRONG FETCHING POSTS</div>
+  }
 
   if (status === "loading") {
     return <div>CURRENTLY LOADING...</div>;

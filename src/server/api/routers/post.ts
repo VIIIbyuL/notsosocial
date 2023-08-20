@@ -9,7 +9,11 @@ import {
 
 export const PostRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const posts = await ctx.prisma.post.findMany();
+    const posts = await ctx.prisma.post.findMany({
+      include: {
+        author:true, 
+      }
+    });
     return posts;
   }),
   createPost: publicProcedure

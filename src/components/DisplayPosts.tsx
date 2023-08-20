@@ -2,12 +2,20 @@
 import { Like } from "@prisma/client";
 
 type PostResult = {
+  id: string;
   contents: string | null;
-  creationDate: Date | null; // Update the type to Date
-  author?: string | null;
+  creationDate: Date | null;
+  author?: {
+    id: string;
+    name: string | null;
+    email: string | null;
+    emailVerified: Date | null;
+    image: string | null;
+  } | null;
   likes?: Like[] | null;
   comments?: Comment[] | null;
 };
+
 
 export default function DisplaySearch({
   postData,
@@ -15,12 +23,16 @@ export default function DisplaySearch({
   postData: PostResult[];
 }) {
   return (
-    <div className="flex w-screen flex-col items-center gap-5 text-center">
-      NOT SO SOCIAL
+    <div className="flex w-screen flex-col-reverse items-center gap-5 text-center">
       {postData.map((item, index) => (
         <div key={index}>
-          <h3>{item.author}</h3>
+          {item.author ? (
+            <h3>{item.author.name}</h3>
+          ) : (
+            <h3>No Author</h3>
+          )}
           <p>{item.contents}</p>
+          <div>{item.id}</div>
           {/* Format and render the creationDate as a string */}
           <p>
             {item.creationDate
@@ -48,6 +60,7 @@ export default function DisplaySearch({
           {/* <button>LIKING THIS</button> */}
         </div>
       ))}
+      NOT SO SOCIAL
     </div>
   );
 }
