@@ -32,4 +32,38 @@ export const PostRouter = createTRPCRouter({
       });
       return post;
     }),
+  addLike: publicProcedure.query(async ({ input, ctx }) => {
+    if (typeof input !== "object" || input === null || !("postId" in input)) {
+      throw new Error("Invalid input");
+    }
+
+    const { postId } = input as { postId: string };
+
+    const post = await ctx.prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (!post) {
+      throw new Error("Cannot find post");
+    }
+
+    const like = await ctx.prisma.like.create({
+      data: {
+        author: {
+          connect: {
+            id: ctx.session?.user.id,
+          },
+        },
+        post: {
+          connect: {
+            id: postId,
+          },
+        },
+      },
+    });
+
+    return like;
+  }),
 });

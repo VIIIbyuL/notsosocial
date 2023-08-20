@@ -46,14 +46,14 @@ export default function CreatePost() {
         <button type="submit"> Ready to Post?</button>
       </form>
       <button
-        className="button"
-        onClick={(e) => {
-          e.preventDefault();
-          router.push("/").catch(console.log);
-        }}
-      >
-        Go Back Home
-      </button>
+          className="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/").catch(console.log);
+          }}
+        >
+          Go Back Home
+        </button>
     </>
   );
 }
