@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { type FormEvent } from "react";
@@ -13,7 +11,6 @@ type SearchResult = {
 };
 
 export default function SearchProfile() {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const [name, setName] = useState<string>("");
   const [data, setData] = useState<SearchResult[]>([]);

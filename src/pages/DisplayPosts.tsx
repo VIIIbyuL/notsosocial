@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
-import { Like } from "@prisma/client";
+import { type Like } from "@prisma/client";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 

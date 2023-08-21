@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import { type FormEvent, useState } from "react";
