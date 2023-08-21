@@ -54,9 +54,11 @@ export default function DisplaySearch({
           {/* Render likes if available */}
           {item.likes && (
             <ul>
-              {item.likes.map((like, likeIndex) => (
-                <li key={likeIndex}>{/* Render like details here */}</li>
-              ))}
+              {/* {item.likes.map((like, likeIndex) => (
+                <li key={likeIndex}>{item.likes.author}</li>
+                
+              ))} */}
+              {item.likes.length}
             </ul>
           )}
 
@@ -78,7 +80,6 @@ export default function DisplaySearch({
           </button>
         </div>
       ))}
-      NOT SO SOCIAL
     </div>
   );
 }

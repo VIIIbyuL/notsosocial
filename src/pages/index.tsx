@@ -51,7 +51,10 @@ export default function HomePage() {
   if (session) {
     return (
       <>
-        <nav>
+        <div className="flex w-screen items-center justify-center pb-5 pt-5 text-center">
+          NOT SO SOCIAL?
+        </div>
+        <nav className="mb-10 flex w-screen items-center justify-center">
           <ul>
             <li>
               <button
