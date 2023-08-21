@@ -29,7 +29,7 @@ export default function ViewLike() {
     },
   });
 
-  const prevPostIdRef = useRef<string | string[] | undefined>(postId);
+  const prevPostIdRef = useRef<string | string[] | undefined>('initial');
 
   useEffect(() => {
     if (postId && postId !== prevPostIdRef.current) {
@@ -47,8 +47,19 @@ export default function ViewLike() {
     }
   }, [postId, viewLikeMutation]);
 
+  
+
   return (
     <div>
+      <button
+        className="button"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push("/").catch(console.log);
+        }}
+      >
+        Go Back Home
+      </button>
       <h1>The value of postID is: {postId}</h1>
       <ul>
         {data && data.length > 0 ? (
