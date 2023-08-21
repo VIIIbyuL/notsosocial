@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { Like } from "@prisma/client";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 type PostResult = {
   id: string;
@@ -37,6 +38,8 @@ export default function DisplaySearch({
     });
   };
 
+  const router = useRouter();
+
   return (
     <div className="flex w-screen flex-col-reverse items-center gap-5 text-center">
       {postData.map((item, index) => (
@@ -70,14 +73,30 @@ export default function DisplaySearch({
               ))}
             </ul>
           )}
-          <button
-            onClick={() => {
-              handleLike(item.id);
-            }}
-            className="button"
-          >
-            LIKING THIS
-          </button>
+
+          <ul className="flex gap-2">
+            <li>
+              <button
+                onClick={() => {
+                  handleLike(item.id);
+                }}
+                className="button"
+              >
+                Like
+              </button>
+            </li>
+
+            <li>
+              <button
+                className="button"
+                onClick={() => {
+                  router.push(`/ViewLike/${item.id}`).catch(console.log);
+                }}
+              >
+                View Likes
+              </button>
+            </li>
+          </ul>
         </div>
       ))}
     </div>

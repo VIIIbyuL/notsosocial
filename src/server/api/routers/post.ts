@@ -12,7 +12,7 @@ export const PostRouter = createTRPCRouter({
     const posts = await ctx.prisma.post.findMany({
       include: {
         author: true,
-        likes:true,
+        likes: true,
       },
     });
     return posts;
@@ -83,5 +83,19 @@ export const PostRouter = createTRPCRouter({
       });
 
       return like;
+    }),
+  viewLikes: publicProcedure
+    .input(
+      z.object({
+        postId: z.string(),
+      })
+    )
+    .mutation(async ({ input: { postId }, ctx }) => {
+      const likes = await ctx.prisma.like.findMany({
+        where: {
+          postId: postId,
+        },
+      });
+      return likes;
     }),
 });
