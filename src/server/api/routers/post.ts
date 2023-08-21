@@ -96,6 +96,25 @@ export const PostRouter = createTRPCRouter({
           postId: postId,
         },
       });
-      return likes;
+
+      // Fetch the author's name for each like
+      const likesWithAuthors = await Promise.all(
+        likes.map(async (like) => {
+          const author = await ctx.prisma.user.findUnique({
+            where: {
+              id: like.authorId,
+            },
+            select: {
+              name: true, // Include the author's name
+            },
+          });
+          return {
+            ...like,
+            author: author,
+          };
+        })
+      );
+
+      return likesWithAuthors;
     }),
 });
