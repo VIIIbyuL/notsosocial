@@ -40,6 +40,8 @@ model Like {
 
     @@index([authorId])
     @@index([postId])
+    @@unique([authorId, postId])
+    
 }
 
 model Comment {

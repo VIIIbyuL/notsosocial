@@ -86,6 +86,7 @@ export default function EditProfile() {
       <form onSubmit={handleSubmit}>
         <label htmlFor="name"> Name: </label>
         <input
+          className="text-black"
           type="text"
           id="name"
           name="name"
@@ -99,6 +100,7 @@ export default function EditProfile() {
 
         <label htmlFor="email">Email:</label>
         <input
+          className="text-black"
           type="email"
           id="email"
           name="email"
@@ -112,6 +114,7 @@ export default function EditProfile() {
 
         <label htmlFor="image">Image: </label>
         <input
+          className="text-black"
           type="file"
           id="image"
           name="image"

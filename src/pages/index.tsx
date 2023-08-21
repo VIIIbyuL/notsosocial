@@ -21,7 +21,7 @@ export default function HomePage() {
   const { data: postData = [], error } = api.post.getAll.useQuery();
 
   if (error) {
-    return <div>SOMETHING WHEN WRONG FETCHING POSTS</div>
+    return <div>SOMETHING WHEN WRONG FETCHING POSTS</div>;
   }
 
   if (status === "loading") {
@@ -58,6 +58,7 @@ export default function HomePage() {
                 onClick={() => {
                   router.push("/CreatePost").catch(console.log);
                 }}
+                className="button"
               >
                 {" "}
                 make a post

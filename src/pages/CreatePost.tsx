@@ -40,20 +40,24 @@ export default function CreatePost() {
             e.preventDefault();
             setContents(e.target.value);
           }}
+          className="text-black"
           required
         ></input>
 
-        <button type="submit"> Ready to Post?</button>
+        <button type="submit" className="button">
+          {" "}
+          Ready to Post?
+        </button>
       </form>
       <button
-          className="button"
-          onClick={(e) => {
-            e.preventDefault();
-            router.push("/").catch(console.log);
-          }}
-        >
-          Go Back Home
-        </button>
+        className="button"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push("/").catch(console.log);
+        }}
+      >
+        Go Back Home
+      </button>
     </>
   );
 }

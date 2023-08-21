@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { Like } from "@prisma/client";
+import { api } from "~/utils/api";
 
 type PostResult = {
   id: string;
@@ -16,21 +17,31 @@ type PostResult = {
   comments?: Comment[] | null;
 };
 
-
 export default function DisplaySearch({
   postData,
 }: {
   postData: PostResult[];
 }) {
+  const likePhotoMutation = api.post.likePost.useMutation({
+    onSuccess: (data) => {
+      console.log("add like has worked", data);
+    },
+    onError: (err) => {
+      console.log("error has occurred", err);
+    },
+  });
+
+  const handleLike = (postId: string) => {
+    likePhotoMutation.mutate({
+      postId,
+    });
+  };
+
   return (
     <div className="flex w-screen flex-col-reverse items-center gap-5 text-center">
       {postData.map((item, index) => (
         <div key={index}>
-          {item.author ? (
-            <h3>{item.author.name}</h3>
-          ) : (
-            <h3>No Author</h3>
-          )}
+          {item.author ? <h3>{item.author.name}</h3> : <h3>No Author</h3>}
           <p>{item.contents}</p>
           <div>{item.id}</div>
           {/* Format and render the creationDate as a string */}
@@ -57,7 +68,14 @@ export default function DisplaySearch({
               ))}
             </ul>
           )}
-          {/* <button>LIKING THIS</button> */}
+          <button
+            onClick={() => {
+              handleLike(item.id);
+            }}
+            className="button"
+          >
+            LIKING THIS
+          </button>
         </div>
       ))}
       NOT SO SOCIAL
