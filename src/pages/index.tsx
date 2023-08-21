@@ -3,7 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "~/utils/api";
-import DisplayPosts from "~/components/DisplayPosts";
+import DisplayPosts from "~/pages/DisplayPosts";
 // import { type Like } from "@prisma/client";
 
 // type PostResult = {

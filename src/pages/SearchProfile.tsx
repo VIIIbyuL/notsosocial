@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { type FormEvent } from "react";
 import { api } from "~/utils/api";
-import DisplaySearch from "~/components/DisplaySearch";
+import DisplaySearch from "~/pages/DisplaySearch";
 
 type SearchResult = {
   name: string | null;
