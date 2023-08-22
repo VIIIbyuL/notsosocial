@@ -29,7 +29,7 @@ export default function ViewLike() {
     },
   });
 
-  const prevPostIdRef = useRef<string | string[] | undefined>('initial');
+  const prevPostIdRef = useRef<string | string[] | undefined>("initial");
 
   useEffect(() => {
     if (postId && postId !== prevPostIdRef.current) {
@@ -46,8 +46,6 @@ export default function ViewLike() {
       prevPostIdRef.current = postIdStr;
     }
   }, [postId, viewLikeMutation]);
-
-  
 
   return (
     <div>

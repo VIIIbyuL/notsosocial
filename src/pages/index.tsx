@@ -84,8 +84,17 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Post loader component here? */}
-        <DisplayPosts postData={postData} />
+        <div className="flex justify-center p-5">
+          <div className="flex w-full items-center justify-center rounded-lg bg-slate-700 p-10 md:w-2/6">
+            <div className="min-h-96 max-h-96 overflow-y-auto overflow-x-hidden">
+              <div className="flex flex-col items-center">
+                {" "}
+                {/* Center the content */}
+                <DisplayPosts postData={postData} />
+              </div>
+            </div>
+          </div>
+        </div>
 
         <ul className="fixed bottom-0 flex w-full items-center justify-center gap-5">
           <li>

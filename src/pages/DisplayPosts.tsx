@@ -40,11 +40,14 @@ export default function DisplaySearch({
   const router = useRouter();
 
   return (
-    <div className="flex w-screen flex-col-reverse items-center gap-5 text-center">
+    <div className="flex w-screen flex-col-reverse items-center gap-10 text-center">
       {postData.map((item, index) => (
-        <div key={index}>
+        <div
+          className=" w-[300px] max-w-md overflow-x-auto overflow-y-hidden break-all rounded-lg bg-neutral-600 p-5"
+          key={index}
+        >
           {item.author ? <h3>{item.author.name}</h3> : <h3>No Author</h3>}
-          <p>{item.contents}</p>
+          <p className="whitespace-normal">{item.contents}</p>
           <div>{item.id}</div>
           {/* Format and render the creationDate as a string */}
           <p>

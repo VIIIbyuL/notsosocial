@@ -7,5 +7,11 @@ body {
 }
 
 .button {
-  @apply rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700;
+  @apply rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 min-w-min;
+}
+
+body {
+  max-width: 100%; /* Set a maximum width for the body */
+  margin: 0 auto; /* Center the content horizontally */
+  overflow: hidden; /* Hide horizontal overflow */
 }
