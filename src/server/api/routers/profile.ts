@@ -51,4 +51,13 @@ export const ProfileRouter = createTRPCRouter({
       });
       return profile;
     }),
+  deleteProfile: publicProcedure.mutation(async ({ ctx }) => {
+    const userId = ctx.session?.user.id;
+    const profile = await ctx.prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+    return profile;
+  }),
 });

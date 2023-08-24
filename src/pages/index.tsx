@@ -50,7 +50,7 @@ export default function HomePage() {
   if (session) {
     return (
       <>
-        <div className="flex w-screen items-center justify-center pb-5 pt-5 text-center">
+        <div className="flex w-screen items-center justify-center pt-5 text-center">
           NOT SO SOCIAL?
         </div>
         <nav className="mb-10 flex w-screen items-center justify-center">
@@ -70,7 +70,7 @@ export default function HomePage() {
         </nav>
 
         {showPop && (
-          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-slate-500 p-16">
+          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-slate-500 p-10">
             <div>Welcome {session.user.name} !</div>
             <div className="mt-5 flex items-center justify-center text-center">
               <button
@@ -85,12 +85,16 @@ export default function HomePage() {
         )}
 
         <div className="flex justify-center p-5">
-          <div className="flex w-full items-center justify-center rounded-lg bg-slate-700 p-10 md:w-2/6">
-            <div className="min-h-96 max-h-96 overflow-y-auto overflow-x-hidden">
-              <div className="flex flex-col items-center">
+          <div className="flex w-[400px] items-center justify-center rounded-lg bg-slate-700 p-10">
+            <div className="h-[500px] overflow-y-auto overflow-x-hidden">
+              <div className="flex flex-col items-center justify-center">
                 {" "}
                 {/* Center the content */}
-                <DisplayPosts postData={postData} />
+                {postData.length != 0 ? (
+                  <DisplayPosts postData={postData} />
+                ) : (
+                  <div>No Posts Yet.</div>
+                )}
               </div>
             </div>
           </div>
@@ -115,7 +119,7 @@ export default function HomePage() {
                 router.push("/Profile").catch(console.log);
               }}
             >
-              View Your Profile
+              Profile
             </button>
           </li>
 
@@ -126,7 +130,7 @@ export default function HomePage() {
                 router.push("/SearchProfile").catch(console.log);
               }}
             >
-              Searching For Someone?
+              Search
             </button>
           </li>
         </ul>

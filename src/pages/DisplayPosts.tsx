@@ -1,6 +1,7 @@
 import { type Like } from "@prisma/client";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
+// import { useEffect } from "react";
 
 type PostResult = {
   id: string;
@@ -22,6 +23,7 @@ export default function DisplaySearch({
 }: {
   postData: PostResult[];
 }) {
+  console.log(postData, postData.length);
   const likePhotoMutation = api.post.likePost.useMutation({
     onSuccess: (data) => {
       console.log("add like has worked", data);
@@ -81,6 +83,7 @@ export default function DisplaySearch({
               <button
                 onClick={() => {
                   handleLike(item.id);
+                  window.location.reload();
                 }}
                 className="button"
               >

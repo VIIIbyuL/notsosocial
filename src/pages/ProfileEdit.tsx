@@ -11,6 +11,15 @@ export default function EditProfile() {
   const [email, setEmail] = useState<string>("");
   const [image, setImage] = useState<string>("");
 
+  const deleteProfileMutation = api.profile.deleteProfile.useMutation({
+    onSuccess: (data) => {
+      console.log("successfully deleted", data);
+    },
+    onError: (error) => {
+      console.error("Error deleting profile:", error);
+    },
+  });
+
   const editProfileMutation = api.profile.editProfile.useMutation({
     onSuccess: (data) => {
       // Handle success, reset fields, etc.
@@ -36,6 +45,15 @@ export default function EditProfile() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImageUrl: string = e.target.value;
     setImage(selectedImageUrl);
+  };
+  const handleDelete = (event: FormEvent) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    if (!session) {
+      return;
+    }
+
+    deleteProfileMutation.mutate();
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -124,7 +142,7 @@ export default function EditProfile() {
           Save Your Changes
         </button>
 
-        <button
+        {/* <button
           className="button"
           onClick={(e) => {
             e.preventDefault();
@@ -132,8 +150,31 @@ export default function EditProfile() {
           }}
         >
           Go Back Home
-        </button>
+        </button> */}
       </form>
+
+      {/* go back home button */}
+      <button
+        className="button"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push("/").catch(console.log);
+        }}
+      >
+        Go Back Home
+      </button>
+
+      {/* delete button */}
+      <button
+        className="button"
+        onClick={(e) => {
+          e.preventDefault();
+          handleDelete(e); // Call the handleDelete function
+          router.push("/").catch(console.log);
+        }}
+      >
+        Delete Profile
+      </button>
     </div>
   );
 }
