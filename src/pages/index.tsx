@@ -85,7 +85,7 @@ export default function HomePage() {
         )}
 
         <div className="flex justify-center p-5">
-          <div className="flex w-[400px] items-center justify-center rounded-lg bg-slate-700 p-10">
+          <div className="flex w-[430px] items-center justify-center rounded-lg bg-slate-700 p-10">
             <div className="h-[500px] overflow-y-auto overflow-x-hidden">
               <div className="flex flex-col items-center justify-center">
                 {" "}

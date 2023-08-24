@@ -1,7 +1,6 @@
 import { type Like } from "@prisma/client";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
-// import { useEffect } from "react";
 
 type PostResult = {
   id: string;
@@ -45,7 +44,7 @@ export default function DisplaySearch({
     <div className="flex w-screen flex-col-reverse items-center gap-10 text-center">
       {postData.map((item, index) => (
         <div
-          className=" w-[300px] max-w-md overflow-x-auto overflow-y-hidden break-all rounded-lg bg-neutral-600 p-5"
+          className=" w-[350px] max-w-md overflow-x-auto overflow-y-hidden break-all rounded-lg bg-neutral-600 p-5"
           key={index}
         >
           {item.author ? <h3>{item.author.name}</h3> : <h3>No Author</h3>}
@@ -81,9 +80,19 @@ export default function DisplaySearch({
           <ul className="flex gap-2">
             <li>
               <button
+                className="button"
+                onClick={() => {
+                  router.push(`/ViewLike/${item.id}`).catch(console.log);
+                }}
+              >
+                View Likes
+              </button>
+            </li>
+
+            <li>
+              <button
                 onClick={() => {
                   handleLike(item.id);
-                  window.location.reload();
                 }}
                 className="button"
               >
@@ -93,12 +102,12 @@ export default function DisplaySearch({
 
             <li>
               <button
-                className="button"
                 onClick={() => {
-                  router.push(`/ViewLike/${item.id}`).catch(console.log);
+                  router.push("SOMELOCATIONFOR COMMENTS").catch(console.log);
                 }}
+                className = 'button'
               >
-                View Likes
+                Comment
               </button>
             </li>
           </ul>
