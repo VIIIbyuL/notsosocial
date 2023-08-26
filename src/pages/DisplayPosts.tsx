@@ -105,7 +105,7 @@ export default function DisplaySearch({
                 onClick={() => {
                   router.push(`/Comments/${item.id}`).catch(console.log);
                 }}
-                className = 'button'
+                className="button"
               >
                 Comment
               </button>

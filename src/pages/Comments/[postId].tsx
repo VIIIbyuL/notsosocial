@@ -76,7 +76,19 @@ export default function Comments() {
           required
         ></input>
 
-        <button type="submit">submit</button>
+        <button className="button" type="submit">
+          submit
+        </button>
+
+        <button
+          className="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/").catch(console.log);
+          }}
+        >
+          Go Back Home
+        </button>
       </form>
     </div>
   );
