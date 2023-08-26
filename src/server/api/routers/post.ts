@@ -111,4 +111,65 @@ export const PostRouter = createTRPCRouter({
 
       return likesWithAuthors;
     }),
+  addComment: publicProcedure
+    .input(
+      z.object({
+        postId: z.string(),
+        contents: z.string(),
+      })
+    )
+    .mutation(async ({ input: { postId, contents }, ctx }) => {
+      const userId = ctx.session?.user.id;
+
+      const comment = await ctx.prisma.comment.create({
+        data: {
+          author: {
+            connect: {
+              id: userId,
+            },
+          },
+          post: {
+            connect: {
+              id: postId,
+            },
+          },
+          contents: contents,
+        },
+      });
+
+      return comment;
+    }),
+  viewComments: publicProcedure
+    .input(
+      z.object({
+        postId: z.string(),
+      })
+    )
+    .mutation(async ({ input: { postId }, ctx }) => {
+      const comments = await ctx.prisma.comment.findMany({
+        where: {
+          postId: postId,
+        },
+      });
+
+      // Fetch the author's name for each comment
+      const commentsWithAuthors = await Promise.all(
+        comments.map(async (comment) => {
+          const author = await ctx.prisma.user.findUnique({
+            where: {
+              id: comment.authorId,
+            },
+            select: {
+              name: true, // Include the author's name
+            },
+          });
+          return {
+            ...comment,
+            author: author,
+          };
+        })
+      );
+
+      return commentsWithAuthors;
+    }),
 });
