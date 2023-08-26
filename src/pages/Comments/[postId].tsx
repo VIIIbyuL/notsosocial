@@ -21,22 +21,22 @@ import { type FormEvent, useState } from "react";
 export default function Comments() {
   const router = useRouter();
   const { postId } = router.query;
-//   const [data, setData] = useState<
-//     { contents: string; author: { id: string } }[]
-//   >([]);
+  //   const [data, setData] = useState<
+  //     { contents: string; author: { id: string } }[]
+  //   >([]);
   const [contents, setContents] = useState<string>("");
 
   const addCommentMutation = api.post.addComment.useMutation({
     onSuccess: (comment) => {
-      
-    //   const { contents, author } = comment;
-    //   setData((prevData) => [
-    //     ...prevData,
-    //     {
-    //       contents,
-    //       author,
-    //     },
-    //   ]);
+      //   const { contents, author } = comment;
+      //   setData((prevData) => [
+      //     ...prevData,
+      //     {
+      //       contents,
+      //       author,
+      //     },
+      //   ]);
+      setContents("");
       console.log(comment);
     },
     onError: (error) => {
@@ -60,7 +60,6 @@ export default function Comments() {
     <div>
       This page is going to have a displayer and a maker functionality component
       after.
-      
       <div>{postId}</div>
       <form onSubmit={onSubmit}>
         <label htmlFor="contents"> Enter your comment: </label>
