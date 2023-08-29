@@ -7,6 +7,7 @@ export const PostRouter = createTRPCRouter({
       include: {
         author: true,
         likes: true,
+        comments: true,
       },
     });
     return posts;

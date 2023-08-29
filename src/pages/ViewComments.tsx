@@ -49,7 +49,6 @@ function ViewComments({ postId }: ViewCommentsProps) {
 
   return (
     <div>
-      Post id: {postId}
       <div className="flex justify-center p-5">
         <div className="flex w-[430px] items-center justify-center rounded-lg bg-slate-700 p-10">
           <div className="h-[500px] overflow-y-auto overflow-x-hidden">
@@ -61,24 +60,32 @@ function ViewComments({ postId }: ViewCommentsProps) {
                     .reverse()
                     .map((item) => (
                       <li
-                        className="w-[350px] max-w-md overflow-x-auto overflow-y-hidden break-all rounded-lg bg-neutral-600 p-5"
+                        className="w-[350px] max-w-md rounded-lg bg-slate-600 p-5 text-white shadow-md"
                         key={item.id}
                       >
-                        {/* Add margin-bottom (mb-4) to create vertical spacing */}
-                        <p>ID: {item.id}</p>
-                        <p>Author ID: {item.authorId}</p>
-                        <p>Post ID: {item.postId}</p>
-                        <p>contents: {item.contents}</p>
-                        <p>
-                          {item.creationDate
-                            ? new Date(item.creationDate).toLocaleString()
-                            : ""}
+                        <p className="text-sm text-gray-500">
+                          {item.creationDate ? (
+                            <span className="text-gray-400">
+                              {new Date(item.creationDate).toLocaleString()}
+                            </span>
+                          ) : (
+                            ""
+                          )}
                         </p>
-                        {item.author && <p>Author Name: {item.author.name}</p>}
+
+                        {/* Comment Header */}
+                        <div className="mb-2">
+                          <p className="text-xl font-semibold">
+                            {item.author && <>{item.author.name} says</>}
+                          </p>
+                        </div>
+
+                        {/* Comment Content */}
+                        <p className="text-gray-200">{item.contents}</p>
                       </li>
                     ))
                 ) : (
-                  <p> So empty :( </p>
+                  <p>No comments available.</p>
                 )}
               </ul>
             </div>

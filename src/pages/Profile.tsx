@@ -21,27 +21,35 @@ export default function Profile() {
 
   // Assuming profileData contains the user's profile information
   return (
-    <div>
-      <h1>Your Profile</h1>
-      <p>Name: {profileData?.name ?? "none available"}</p>
-      <p>Email: {profileData?.email ?? "none available"}</p>
-      {/* Render other profile information */}
-      <button
-        className="button"
-        onClick={() => {
-          router.push("/").catch(console.log);
-        }}
-      >
-        Go Back Home
-      </button>
-      <button
-        className="button"
-        onClick={() => {
-          router.push("/ProfileEdit").catch(console.log);
-        }}
-      >
-        Edit Your Profile
-      </button>
+    <div className="flex flex-col items-center justify-center space-y-4">
+      <div className="mt-10 flex w-[350px] max-w-md flex-col items-center justify-center space-y-4 rounded-lg bg-slate-600 p-5 text-white shadow-md">
+        <h1 className="text-3xl font-semibold">Your Profile</h1>
+        <p className="text-lg">
+          Username: {profileData?.name ?? "none available"}
+        </p>
+        <p className="text-lg">
+          Email: {profileData?.email ?? "none available"}
+        </p>
+        {/* Render other profile information */}
+        <div className="flex items-center justify-center text-center ">
+          <button
+            onClick={() => {
+              router.push("/").catch(console.log);
+            }}
+            className="button mr-3"
+          >
+            Home
+          </button>
+          <button
+            onClick={() => {
+              router.push("/ProfileEdit").catch(console.log);
+            }}
+            className="button"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

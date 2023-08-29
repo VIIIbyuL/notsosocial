@@ -1,4 +1,5 @@
 import { type Like } from "@prisma/client";
+import { type Comment } from "@prisma/client";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 
@@ -44,43 +45,36 @@ export default function DisplaySearch({
     <div className="flex w-screen flex-col-reverse items-center gap-10 text-center">
       {postData.map((item, index) => (
         <div
-          className="w-[350px] max-w-md overflow-x-auto overflow-y-hidden break-all rounded-lg bg-neutral-600 p-5"
+          className="w-[350px] max-w-md rounded-lg bg-slate-600 p-5 text-white shadow-md"
           key={index}
         >
-          {item.author ? <h3>{item.author.name}</h3> : <h3>No Author</h3>}
-          <p className="whitespace-normal">{item.contents}</p>
-          <div>{item.id}</div>
           {/* Format and render the creationDate as a string */}
-          <p>
+          <p className="text-sm text-gray-500">
             {item.creationDate
               ? new Date(item.creationDate).toLocaleString()
               : ""}
           </p>
 
-          {/* Render likes if available */}
-          {item.likes && (
-            <ul>
-              {/* {item.likes.map((like, likeIndex) => (
-                <li key={likeIndex}>{item.likes.author}</li>
-                
-              ))} */}
-              {item.likes.length}
-            </ul>
-          )}
+          <div className="mb-2">
+            <p className="text-xl font-semibold">
+              {item.author ? `${item.author.name} says` : "No Author says"}{" "}
+              {item.contents}
+            </p>
+          </div>
 
-          {/* Render comments if available */}
-          {item.comments && (
-            <ul>
-              {item.comments.map((comment, commentIndex) => (
-                <li key={commentIndex}>{/* Render comment details here */}</li>
-              ))}
-            </ul>
-          )}
+          <div className="mb-2">
+            {item.likes && (
+              <p className="text-sm">Likes: {item.likes.length}</p>
+            )}
+            {item.comments && (
+              <p className="text-sm">Comments: {item.comments.length}</p>
+            )}
+          </div>
 
-          <ul className="flex gap-2">
+          <ul className="flex items-center justify-center gap-2 text-center">
             <li>
               <button
-                className="button"
+                className="button whitespace-nowrap"
                 onClick={() => {
                   router.push(`/ViewLike/${item.id}`).catch(console.log);
                 }}

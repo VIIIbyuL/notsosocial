@@ -60,10 +60,10 @@ export default function Comments() {
   };
   return (
     <div>
-      This page is going to have a displayer and a maker functionality component
-      after.
-      <div>{typeof postId}</div>
-      <form onSubmit={onSubmit}>
+      <form
+        className=" flex w-screen flex-col items-center justify-center pt-5  text-center"
+        onSubmit={onSubmit}
+      >
         <label htmlFor="contents"> Enter your comment: </label>
         <input
           type="text"
@@ -78,19 +78,21 @@ export default function Comments() {
           required
         ></input>
 
-        <button className="button" type="submit">
-          submit
-        </button>
+        <div className="mb-7 mt-2 gap-5">
+          <button className="button mr-2" type="submit">
+            submit
+          </button>
 
-        <button
-          className="button"
-          onClick={(e) => {
-            e.preventDefault();
-            router.push("/").catch(console.log);
-          }}
-        >
-          Go Back Home
-        </button>
+          <button
+            className="button"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/").catch(console.log);
+            }}
+          >
+            Home
+          </button>
+        </div>
       </form>
       <div>
         {typeof postId === "string" ? (
@@ -99,7 +101,6 @@ export default function Comments() {
           <p>edge case</p>
         )}
       </div>
-
     </div>
   );
 }

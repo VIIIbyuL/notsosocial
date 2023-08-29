@@ -50,10 +50,10 @@ export default function HomePage() {
   if (session) {
     return (
       <>
-        <div className="flex w-screen items-center justify-center pt-5 text-center">
+        <div className="flex w-screen items-center justify-center pt-5 text-center text-white">
           NOT SO SOCIAL?
         </div>
-        <nav className="mb-10 flex w-screen items-center justify-center">
+        <nav className="mb-8 mt-2 flex w-screen items-center justify-center">
           <ul>
             <li>
               <button
@@ -62,23 +62,23 @@ export default function HomePage() {
                 }}
                 className="button"
               >
-                {" "}
-                make a post
+                Post
               </button>
             </li>
           </ul>
         </nav>
 
         {showPop && (
-          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-slate-500 p-10">
-            <div>Welcome {session.user.name} !</div>
+          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-slate-700 p-10 text-white">
+            <div>Welcome {session.user.name}!</div>
             <div className="mt-5 flex items-center justify-center text-center">
               <button
                 onClick={() => {
                   setShowPop(false);
                 }}
+                className="button"
               >
-                got it
+                Got it
               </button>
             </div>
           </div>
@@ -88,12 +88,11 @@ export default function HomePage() {
           <div className="flex w-[430px] items-center justify-center rounded-lg bg-slate-700 p-10">
             <div className="h-[500px] overflow-y-auto overflow-x-hidden">
               <div className="flex flex-col items-center justify-center">
-                {" "}
                 {/* Center the content */}
-                {postData.length != 0 ? (
+                {postData.length !== 0 ? (
                   <DisplayPosts postData={postData} />
                 ) : (
-                  <div>No Posts Yet.</div>
+                  <div className="text-white">No Posts Yet.</div>
                 )}
               </div>
             </div>
