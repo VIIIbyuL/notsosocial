@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import { type FormEvent, useState } from "react";
+import ViewComments from "../ViewComments";
 
 // type CommentResult = {
 //   id: string;
@@ -36,6 +37,7 @@ export default function Comments() {
       //       author,
       //     },
       //   ]);
+      window.location.reload();
       setContents("");
       console.log(comment);
     },
@@ -60,7 +62,7 @@ export default function Comments() {
     <div>
       This page is going to have a displayer and a maker functionality component
       after.
-      <div>{postId}</div>
+      <div>{typeof postId}</div>
       <form onSubmit={onSubmit}>
         <label htmlFor="contents"> Enter your comment: </label>
         <input
@@ -90,6 +92,14 @@ export default function Comments() {
           Go Back Home
         </button>
       </form>
+      <div>
+        {typeof postId === "string" ? (
+          <ViewComments postId={postId} />
+        ) : (
+          <p>edge case</p>
+        )}
+      </div>
+
     </div>
   );
 }
