@@ -41,35 +41,53 @@ export default function SearchProfile() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name"> Input Name: </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => {
+      <div className="text-align mb-5 mt-5 flex w-screen items-center justify-center">
+        <button
+          className="button bg-slate-700 text-white"
+          onClick={(e) => {
             e.preventDefault();
-            setName(e.target.value);
+            router.push("/").catch(console.log);
           }}
-          required
-        ></input>
-
-        <button type="submit">Search</button>
-      </form>
-      <button
-        className="button"
-        onClick={(e) => {
-          e.preventDefault();
-          router.push("/").catch(console.log);
-        }}
+        >
+          Home
+        </button>
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-5 text-center"
       >
-        Go Back Home
-      </button>
+        <div>
+          <label htmlFor="name" className="mr-5 text-white">
+            {" "}
+            Input Name:{" "}
+          </label>
+          <input
+            className="mr-5 rounded border bg-slate-700 p-2 text-white"
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            onChange={(e) => {
+              e.preventDefault();
+              setName(e.target.value);
+            }}
+            required
+          ></input>
+          <button type="submit" className="button bg-slate-700 text-white">
+            Search
+          </button>
+        </div>
+      </form>
 
-      {/* render here */}
-      {/* DisplaySearch */}
-      <DisplaySearch searchData={data} />
+      <div className="flex justify-center p-5">
+        <div className="flex w-[430px] items-center justify-center rounded-lg bg-slate-700 p-10">
+          <div className="h-[500px] overflow-y-auto overflow-x-hidden">
+            <div className="flex flex-col items-center justify-center">
+              <DisplaySearch searchData={data} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

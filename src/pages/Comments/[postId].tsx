@@ -60,37 +60,40 @@ export default function Comments() {
   };
   return (
     <div>
+      <div className="text-align mb-5 mt-5 flex w-screen items-center justify-center">
+        <button
+          className="button bg-slate-700 text-white"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/").catch(console.log);
+          }}
+        >
+          Home
+        </button>
+      </div>
       <form
-        className=" flex w-screen flex-col items-center justify-center pt-5  text-center"
+        className="flex flex-col items-center justify-center text-center"
         onSubmit={onSubmit}
       >
-        <label htmlFor="contents"> Enter your comment: </label>
-        <input
-          type="text"
-          id="contents"
-          name="contents"
-          value={contents}
-          onChange={(e) => {
-            e.preventDefault();
-            setContents(e.target.value);
-          }}
-          className="text-black"
-          required
-        ></input>
-
-        <div className="mb-7 mt-2 gap-5">
-          <button className="button mr-2" type="submit">
-            submit
-          </button>
-
-          <button
-            className="button"
-            onClick={(e) => {
+        <div>
+          <label htmlFor="contents" className="mr-5 text-white">
+            {" "}
+            Enter your comment:{" "}
+          </label>
+          <input
+            type="text"
+            id="contents"
+            name="contents"
+            value={contents}
+            onChange={(e) => {
               e.preventDefault();
-              router.push("/").catch(console.log);
+              setContents(e.target.value);
             }}
-          >
-            Home
+            className="mr-5 rounded border bg-slate-700 p-2 text-white"
+            required
+          ></input>
+          <button className="button bg-slate-700 text-white" type="submit">
+            Submit
           </button>
         </div>
       </form>

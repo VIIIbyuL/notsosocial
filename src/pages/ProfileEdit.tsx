@@ -100,81 +100,89 @@ export default function EditProfile() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name"> Name: </label>
-        <input
-          className="text-black"
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => {
-            e.preventDefault();
-            setName(e.target.value);
-          }}
-          required
-        ></input>
-
-        <label htmlFor="email">Email:</label>
-        <input
-          className="text-black"
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => {
-            e.preventDefault();
-            setEmail(e.target.value);
-          }}
-          required
-        ></input>
-
-        <label htmlFor="image">Image: </label>
-        <input
-          className="text-black"
-          type="file"
-          id="image"
-          name="image"
-          onChange={handleImageChange}
-        ></input>
-
-        <button type="submit" className="button">
-          Save Your Changes
-        </button>
-
-        {/* <button
-          className="button"
+      <div className="flex w-screen items-center justify-center text-center">
+        {/* Go back home button */}
+        <button
+          className="button mb-5 mt-5 bg-slate-700 text-white"
           onClick={(e) => {
             e.preventDefault();
             router.push("/").catch(console.log);
           }}
         >
-          Go Back Home
-        </button> */}
+          Home
+        </button>
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-screen flex-col items-center justify-center gap-5 text-center"
+      >
+        <div>
+          <label htmlFor="name" className="mr-5 text-white">
+            {" "}
+            Name:{" "}
+          </label>
+          <input
+            className="rounded border bg-slate-700 p-2 text-white"
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            onChange={(e) => {
+              e.preventDefault();
+              setName(e.target.value);
+            }}
+            required
+          ></input>
+        </div>
+
+        <div>
+          <label htmlFor="email" className="mr-5 text-white">
+            Email:
+          </label>
+          <input
+            className="rounded border bg-slate-700 p-2 text-white"
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => {
+              e.preventDefault();
+              setEmail(e.target.value);
+            }}
+            required
+          ></input>
+        </div>
+
+        <div>
+          <label htmlFor="image" className="mr-5 text-white">
+            Image:{" "}
+          </label>
+          <input
+            className="rounded border bg-slate-700 p-2 text-white"
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleImageChange}
+          ></input>
+        </div>
+
+        <div className="flex gap-5">
+          <button type="submit" className="button bg-slate-700 text-white">
+            Save Profile
+          </button>
+          {/* Delete button */}
+          <button
+            className="button bg-slate-700 text-white"
+            onClick={(e) => {
+              e.preventDefault();
+              handleDelete(e); // Call the handleDelete function
+              router.push("/").catch(console.log);
+            }}
+          >
+            Delete Profile
+          </button>
+        </div>
       </form>
-
-      {/* go back home button */}
-      <button
-        className="button"
-        onClick={(e) => {
-          e.preventDefault();
-          router.push("/").catch(console.log);
-        }}
-      >
-        Go Back Home
-      </button>
-
-      {/* delete button */}
-      <button
-        className="button"
-        onClick={(e) => {
-          e.preventDefault();
-          handleDelete(e); // Call the handleDelete function
-          router.push("/").catch(console.log);
-        }}
-      >
-        Delete Profile
-      </button>
     </div>
   );
 }

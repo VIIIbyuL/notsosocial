@@ -24,39 +24,48 @@ export default function CreatePost() {
     createPostMutation.mutate({
       contents,
     });
+    router.push("/").catch(console.log);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name"> Enter your post contents: </label>
-        <input
-          type="text"
-          id="contents"
-          name="contents"
-          value={contents}
-          onChange={(e) => {
+      <div className="text-align mb-5 mt-5 flex w-screen items-center justify-center">
+        <button
+          className="button bg-slate-700 text-white"
+          onClick={(e) => {
             e.preventDefault();
-            setContents(e.target.value);
+            router.push("/").catch(console.log);
           }}
-          className="text-black"
-          required
-        ></input>
-
-        <button type="submit" className="button">
-          {" "}
-          Ready to Post?
+        >
+          Home
         </button>
-      </form>
-      <button
-        className="button"
-        onClick={(e) => {
-          e.preventDefault();
-          router.push("/").catch(console.log);
-        }}
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-5 text-center"
       >
-        Go Back Home
-      </button>
+        <div>
+          <label htmlFor="contents" className="mr-5 text-white">
+            {" "}
+            What u saying?{" "}
+          </label>
+          <input
+            type="text"
+            id="contents"
+            name="contents"
+            value={contents}
+            onChange={(e) => {
+              e.preventDefault();
+              setContents(e.target.value);
+            }}
+            className="mr-5 rounded border bg-slate-700 p-2 text-white"
+            required
+          ></input>
+          <button type="submit" className="button bg-slate-700 text-white">
+            Post
+          </button>
+        </div>
+      </form>
     </>
   );
 }
