@@ -7,7 +7,7 @@ type PostResult = {
   id: string;
   contents: string | null;
   creationDate: Date | null;
-  author?: {
+  author: {
     id: string;
     name: string | null;
     email: string | null;

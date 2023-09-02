@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
+import AuthorPostDisplayer from "./AuthorPostDisplayer";
 
 export default function Profile() {
   const { data: session, status } = useSession();
@@ -50,6 +51,8 @@ export default function Profile() {
           </button>
         </div>
       </div>
+
+      <AuthorPostDisplayer />
     </div>
   );
 }

@@ -173,4 +173,20 @@ export const PostRouter = createTRPCRouter({
 
       return commentsWithAuthors;
     }),
+  viewPosts: publicProcedure
+    .query(async ({ ctx }) => {
+      const authorId = ctx.session?.user.id;
+      const authorPosts = await ctx.prisma.post.findMany({
+        where: {
+          authorId: authorId,
+        },
+        include: {
+          author: true,
+          likes: true,
+          comments: true,
+        },
+      });
+
+      return authorPosts;
+    }),
 });
