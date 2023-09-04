@@ -13,6 +13,15 @@ import DisplayPosts from "~/pages/DisplayPosts";
 //   comments?: Comment[] | null;
 // };
 
+function hasPopupBeenShown() {
+  return localStorage.getItem("popupShown") === "true";
+}
+
+function handleLogout() {
+  localStorage.removeItem("popupShown"); // Clear the flag from localStorage
+  signOut().catch(console.log); // Then, log the user out
+}
+
 export default function HomePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -68,13 +77,15 @@ export default function HomePage() {
           </ul>
         </nav>
 
-        {showPop && (
+        {!hasPopupBeenShown() && showPop && (
           <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-slate-700 p-10 text-white">
             <div>Welcome {session.user.name}!</div>
             <div className="mt-5 flex items-center justify-center text-center">
               <button
                 onClick={() => {
                   setShowPop(false);
+                  // Set the flag in localStorage to indicate that the popup has been shown.
+                  localStorage.setItem("popupShown", "true");
                 }}
                 className="button"
               >
@@ -104,6 +115,7 @@ export default function HomePage() {
             <button
               className="button"
               onClick={() => {
+                handleLogout();
                 signOut().catch(console.log);
               }}
             >
