@@ -173,20 +173,34 @@ export const PostRouter = createTRPCRouter({
 
       return commentsWithAuthors;
     }),
-  viewPosts: publicProcedure
-    .query(async ({ ctx }) => {
-      const authorId = ctx.session?.user.id;
-      const authorPosts = await ctx.prisma.post.findMany({
+  viewPosts: publicProcedure.query(async ({ ctx }) => {
+    const authorId = ctx.session?.user.id;
+    const authorPosts = await ctx.prisma.post.findMany({
+      where: {
+        authorId: authorId,
+      },
+      include: {
+        author: true,
+        likes: true,
+        comments: true,
+      },
+    });
+    return authorPosts;
+  }),
+  DeletePost: publicProcedure
+    .input(
+      z.object({
+        postId: z.string(),
+      })
+    )
+    .mutation(async ({ input: { postId }, ctx }) => {
+      const userId = ctx.session?.user.id;
+      const post = await ctx.prisma.post.delete({
         where: {
-          authorId: authorId,
-        },
-        include: {
-          author: true,
-          likes: true,
-          comments: true,
+          authorId: userId,
+          id: postId,
         },
       });
-
-      return authorPosts;
+      return post;
     }),
 });

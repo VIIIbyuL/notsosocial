@@ -11,6 +11,7 @@ export default function CreatePost() {
     onSuccess: (data) => {
       console.log("post has been created", data);
       //reset the contents after
+      window.location.reload();
       setContents("");
     },
     onError: (err) => {

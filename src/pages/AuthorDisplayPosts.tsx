@@ -18,7 +18,7 @@ type PostResult = {
   comments?: Comment[] | null;
 };
 
-export default function DisplayPosts({
+export default function AuthorDisplaySearch({
   postData,
 }: {
   postData: PostResult[];
@@ -34,8 +34,24 @@ export default function DisplayPosts({
     },
   });
 
+  const DeletePostMutation = api.post.DeletePost.useMutation({
+    onSuccess: (data) => {
+      console.log("add like has worked", data);
+      window.location.reload();
+    },
+    onError: (err) => {
+      console.log("error has occurred", err);
+    },
+  });
+
   const handleLike = (postId: string) => {
     likePhotoMutation.mutate({
+      postId,
+    });
+  };
+
+  const handleDelete = (postId: string) => {
+    DeletePostMutation.mutate({
       postId,
     });
   };
@@ -55,6 +71,15 @@ export default function DisplayPosts({
               ? new Date(item.creationDate).toLocaleString()
               : ""}
           </p>
+
+          <button
+            onClick={() => {
+              handleDelete(item.id);
+            }}
+            className="button text-xs"
+          >
+            Delete
+          </button>
 
           <div className="mb-2">
             <p className="text-xl font-semibold">

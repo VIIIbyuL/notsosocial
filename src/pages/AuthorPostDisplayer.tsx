@@ -1,5 +1,5 @@
 import { api } from "~/utils/api";
-import DisplayPosts from "~/pages/DisplayPosts";
+import AuthorDisplaySearch from "./AuthorDisplayPosts";
 
 export default function AuthorPostDisplayer() {
   const { data: postData = [], error } = api.post.viewPosts.useQuery();
@@ -15,7 +15,7 @@ export default function AuthorPostDisplayer() {
           <div className="flex flex-col items-center justify-center">
             {/* Center the content */}
             {postData.length !== 0 ? (
-              <DisplayPosts postData={postData} />
+              <AuthorDisplaySearch postData={postData} />
             ) : (
               <div className="text-white">No Posts Yet.</div>
             )}
