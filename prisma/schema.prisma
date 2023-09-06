@@ -88,21 +88,24 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
 
-    //non next auth
-    posts Post[]
-    likes Like[]
-    comments Comment[]
-    followers User[]  @relation(name: "Followers")
-    follows   User[]  @relation(name: "Followers")
+  // Non-next auth fields
+  posts     Post[]
+  likes     Like[]
+  comments  Comment[]
+
+  // Define the many-to-many followers/following relationship
+  followers User[]  @relation("Followers")
+  following User[]  @relation("Followers")
 }
+
 
 model VerificationToken {
     identifier String

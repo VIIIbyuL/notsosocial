@@ -60,4 +60,31 @@ export const ProfileRouter = createTRPCRouter({
     });
     return profile;
   }),
+  followProfile: protectedProcedure
+    .input(
+      z.object({
+        userIdToFollow: z.string(),
+      })
+    )
+    .mutation(async ({ input: { userIdToFollow }, ctx }) => {
+      const followerId = ctx.session.user.id;
+
+      if (followerId === userIdToFollow) {
+        throw new Error("You cannot follow yourself.");
+      }
+
+      const user = await ctx.prisma.user.update({
+        where: {
+          id: followerId,
+        },
+        data: {
+          following: {
+            connect: {
+              id: userIdToFollow,
+            },
+          },
+        },
+      });
+      return user;
+    }),
 });

@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 import DisplaySearch from "~/pages/DisplaySearch";
 
 type SearchResult = {
+  id: string | null;
   name: string | null;
   email: string | null;
   image: string | null;
@@ -36,7 +37,7 @@ export default function SearchProfile() {
     });
 
     console.log("Profile searched:", response);
-    // Handle the response data as needed
+  
   };
 
   return (

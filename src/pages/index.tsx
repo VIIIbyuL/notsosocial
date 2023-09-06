@@ -29,7 +29,7 @@ export default function HomePage() {
   const { data: postData = [], error } = api.post.getAll.useQuery();
 
   if (error) {
-    return <div>SOMETHING WHEN WRONG FETCHING POSTS</div>;
+    return <div>Oops! Something went wrong. Please try again later.</div>;
   }
 
   if (status === "loading") {
