@@ -1,5 +1,4 @@
 import { api } from "~/utils/api";
-import { useState } from "react";
 
 type SearchResult = {
   id: string | null;
