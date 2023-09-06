@@ -1,4 +1,5 @@
 import { api } from "~/utils/api";
+import { useState } from "react";
 
 type SearchResult = {
   id: string | null;
@@ -14,22 +15,19 @@ export default function DisplaySearch({
 }) {
   const followMutation = api.profile.followProfile.useMutation({
     onSuccess: (data) => {
-      // Handle success, reset fields, etc.
-
       console.log("Profile followed:", data);
     },
     onError: (error) => {
-      // Handle error, display message, etc.
       console.error("Error updating profile:", error);
     },
   });
 
-  const handleFollow = (followId: string) => {
-    const addFollow = followMutation.mutate({
-      userIdToFollow: followId,
-    });
-
-    console.log("Profile followed:", addFollow);
+  const handleFollow = (followId: string | null) => {
+    if (followId) {
+      followMutation.mutate({
+        userIdToFollow: followId,
+      });
+    }
   };
 
   return (
@@ -44,9 +42,9 @@ export default function DisplaySearch({
             <p className="text-gray-200">Email: {item.email}</p>
             <button
               onClick={() => {
-                item.id && handleFollow(item.id); // Check for null before calling handleFollow
+                item.id && handleFollow(item.id);
               }}
-              className="flex w-full justify-center button"
+              className="button flex w-full justify-center"
             >
               Follow
             </button>
